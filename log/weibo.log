@@ -1,0 +1,623 @@
+              total        used        free      shared  buff/cache   available
+Mem:          32011         620       30242           1        1148       31023
+Swap:             0           0           0
+Tue Dec  8 02:29:59 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 418.87.01    Driver Version: 418.87.01    CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla V100-SXM2...  On   | 00000000:00:07.0 Off |                    0 |
+| N/A   30C    P0    39W / 300W |      0MiB / 16130MiB |      1%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+task:  weibo
+{'lr': 0.001, 'reg': 1e-06, 'embeding_size': 100, 'batch_size': 128, 'nb_filters': 100, 'kernel_sizes': [3, 4, 5], 'dropout': 0.5, 'epochs': 18, 'num_classes': 2, 'target_names': ['NR', 'FR'], 'save_path': 'checkpoint/weights.best.weibo.pgan', 'maxlen': 50, 'n_heads': 7}
+PGAN(
+  (word_embedding): Embedding(15666, 300, padding_idx=0)
+  (user_embedding): Embedding(10052, 100, padding_idx=0)
+  (source_embedding): Embedding(4664, 100)
+  (convs): ModuleList(
+    (0): Conv1d(300, 100, kernel_size=(3,), stride=(1,))
+    (1): Conv1d(300, 100, kernel_size=(4,), stride=(1,))
+    (2): Conv1d(300, 100, kernel_size=(5,), stride=(1,))
+  )
+  (max_poolings): ModuleList(
+    (0): MaxPool1d(kernel_size=48, stride=48, padding=0, dilation=1, ceil_mode=False)
+    (1): MaxPool1d(kernel_size=47, stride=47, padding=0, dilation=1, ceil_mode=False)
+    (2): MaxPool1d(kernel_size=46, stride=46, padding=0, dilation=1, ceil_mode=False)
+  )
+  (linear): Linear(in_features=400, out_features=200, bias=True)
+  (dropout): Dropout(p=0.5, inplace=False)
+  (relu): ReLU()
+  (elu): ELU(alpha=1.0)
+  (fc_out): Sequential(
+    (0): Linear(in_features=500, out_features=100, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.5, inplace=False)
+    (3): Linear(in_features=100, out_features=2, bias=True)
+  )
+  (fc_user_out): Sequential(
+    (0): Linear(in_features=100, out_features=100, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.5, inplace=False)
+    (3): Linear(in_features=100, out_features=3, bias=True)
+  )
+  (fc_ruser_out): Sequential(
+    (0): Linear(in_features=100, out_features=100, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.5, inplace=False)
+    (3): Linear(in_features=100, out_features=3, bias=True)
+  )
+)
+
+Epoch  1 / 18
+Batch[0] - loss: 2.942198  acc: 51.0000%(66/128)
+Batch[1] - loss: 2.958553  acc: 48.0000%(62/128)
+Batch[2] - loss: 2.931878  acc: 53.0000%(68/128)
+Batch[3] - loss: 2.862357  acc: 55.0000%(71/128)
+Batch[4] - loss: 2.870543  acc: 52.0000%(67/128)
+Batch[5] - loss: 2.816044  acc: 53.0000%(69/128)
+Batch[6] - loss: 2.804309  acc: 49.0000%(63/128)
+Batch[7] - loss: 2.800867  acc: 54.0000%(70/128)
+Batch[8] - loss: 2.749530  acc: 64.0000%(83/128)
+Batch[9] - loss: 2.760092  acc: 63.0000%(81/128)
+Batch[10] - loss: 2.757904  acc: 58.0000%(75/128)
+Batch[11] - loss: 2.690269  acc: 61.0000%(79/128)
+Batch[12] - loss: 2.692151  acc: 65.0000%(84/128)
+Batch[13] - loss: 2.737359  acc: 55.0000%(71/128)
+Batch[14] - loss: 2.620466  acc: 67.0000%(86/128)
+Batch[15] - loss: 2.617914  acc: 73.0000%(94/128)
+Batch[16] - loss: 2.710196  acc: 64.0000%(82/128)
+Batch[17] - loss: 2.718747  acc: 63.0000%(81/128)
+Batch[18] - loss: 2.696687  acc: 60.0000%(78/128)
+Batch[19] - loss: 2.658947  acc: 66.0000%(85/128)
+Batch[20] - loss: 2.662567  acc: 74.0000%(95/128)
+Batch[21] - loss: 2.726864  acc: 69.0000%(89/128)
+Batch[22] - loss: 2.627821  acc: 65.0000%(84/128)
+Batch[23] - loss: 2.513042  acc: 75.0000%(96/128)
+Batch[24] - loss: 2.442363  acc: 66.0000%(50/75)
+Average loss:2.734787 average acc:60.000000%
+Val set acc: 0.8137044967880086
+Best val set acc: 0
+
+Epoch  2 / 18
+Batch[0] - loss: 2.569393  acc: 77.0000%(99/128)
+Batch[1] - loss: 2.404866  acc: 78.0000%(100/128)
+Batch[2] - loss: 2.510754  acc: 73.0000%(94/128)
+Batch[3] - loss: 2.418463  acc: 83.0000%(107/128)
+Batch[4] - loss: 2.416254  acc: 83.0000%(107/128)
+Batch[5] - loss: 2.405368  acc: 78.0000%(101/128)
+Batch[6] - loss: 2.421088  acc: 83.0000%(107/128)
+Batch[7] - loss: 2.428188  acc: 81.0000%(104/128)
+Batch[8] - loss: 2.396841  acc: 82.0000%(105/128)
+Batch[9] - loss: 2.458067  acc: 77.0000%(99/128)
+Batch[10] - loss: 2.398328  acc: 76.0000%(98/128)
+Batch[11] - loss: 2.339692  acc: 84.0000%(108/128)
+Batch[12] - loss: 2.267314  acc: 81.0000%(104/128)
+Batch[13] - loss: 2.360488  acc: 82.0000%(105/128)
+Batch[14] - loss: 2.244303  acc: 91.0000%(117/128)
+Batch[15] - loss: 2.263108  acc: 80.0000%(103/128)
+Batch[16] - loss: 2.212652  acc: 92.0000%(118/128)
+Batch[17] - loss: 2.275301  acc: 79.0000%(102/128)
+Batch[18] - loss: 2.267854  acc: 83.0000%(107/128)
+Batch[19] - loss: 2.245442  acc: 84.0000%(108/128)
+Batch[20] - loss: 2.154473  acc: 89.0000%(115/128)
+Batch[21] - loss: 2.110643  acc: 87.0000%(112/128)
+Batch[22] - loss: 1.980844  acc: 96.0000%(123/128)
+Batch[23] - loss: 2.115457  acc: 89.0000%(115/128)
+Batch[24] - loss: 2.002947  acc: 94.0000%(71/75)
+Average loss:2.306725 average acc:83.000000%
+Val set acc: 0.9379014989293362
+Best val set acc: 0
+
+Epoch  3 / 18
+Batch[0] - loss: 1.901596  acc: 94.0000%(121/128)
+Batch[1] - loss: 1.901543  acc: 92.0000%(119/128)
+Batch[2] - loss: 1.909247  acc: 89.0000%(115/128)
+Batch[3] - loss: 1.814482  acc: 96.0000%(124/128)
+Batch[4] - loss: 1.819827  acc: 96.0000%(123/128)
+Batch[5] - loss: 1.780740  acc: 92.0000%(118/128)
+Batch[6] - loss: 1.809682  acc: 93.0000%(120/128)
+Batch[7] - loss: 1.703610  acc: 96.0000%(123/128)
+Batch[8] - loss: 1.800014  acc: 96.0000%(124/128)
+Batch[9] - loss: 1.641641  acc: 98.0000%(126/128)
+Batch[10] - loss: 1.764696  acc: 93.0000%(120/128)
+Batch[11] - loss: 1.652336  acc: 94.0000%(121/128)
+Batch[12] - loss: 1.618063  acc: 96.0000%(124/128)
+Batch[13] - loss: 1.632233  acc: 96.0000%(124/128)
+Batch[14] - loss: 1.550545  acc: 93.0000%(120/128)
+Batch[15] - loss: 1.476855  acc: 99.0000%(127/128)
+Batch[16] - loss: 1.498809  acc: 94.0000%(121/128)
+Batch[17] - loss: 1.598121  acc: 96.0000%(123/128)
+Batch[18] - loss: 1.460175  acc: 96.0000%(124/128)
+Batch[19] - loss: 1.407631  acc: 96.0000%(124/128)
+Batch[20] - loss: 1.459795  acc: 97.0000%(125/128)
+Batch[21] - loss: 1.478524  acc: 98.0000%(126/128)
+Batch[22] - loss: 1.400902  acc: 100.0000%(128/128)
+Batch[23] - loss: 1.432321  acc: 96.0000%(123/128)
+Batch[24] - loss: 1.370867  acc: 97.0000%(73/75)
+Average loss:1.635370 average acc:95.000000%
+Val set acc: 0.9464668094218416
+Best val set acc: 0
+
+Epoch  4 / 18
+Batch[0] - loss: 1.190888  acc: 100.0000%(128/128)
+Batch[1] - loss: 1.172176  acc: 100.0000%(128/128)
+Batch[2] - loss: 1.147830  acc: 100.0000%(128/128)
+Batch[3] - loss: 1.100231  acc: 99.0000%(127/128)
+Batch[4] - loss: 1.141186  acc: 98.0000%(126/128)
+Batch[5] - loss: 1.096939  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.943729  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.969963  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.940194  acc: 100.0000%(128/128)
+Batch[9] - loss: 1.014604  acc: 98.0000%(126/128)
+Batch[10] - loss: 0.992337  acc: 100.0000%(128/128)
+Batch[11] - loss: 1.011184  acc: 98.0000%(126/128)
+Batch[12] - loss: 0.825565  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.869303  acc: 99.0000%(127/128)
+Batch[14] - loss: 0.938864  acc: 99.0000%(127/128)
+Batch[15] - loss: 0.797134  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.751429  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.862017  acc: 98.0000%(126/128)
+Batch[18] - loss: 0.753577  acc: 99.0000%(127/128)
+Batch[19] - loss: 0.737154  acc: 99.0000%(127/128)
+Batch[20] - loss: 0.772431  acc: 99.0000%(127/128)
+Batch[21] - loss: 0.661700  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.755943  acc: 99.0000%(127/128)
+Batch[23] - loss: 0.689132  acc: 99.0000%(127/128)
+Batch[24] - loss: 0.726275  acc: 98.0000%(74/75)
+Average loss:0.914471 average acc:99.000000%
+Val set acc: 0.9379014989293362
+Best val set acc: 0
+
+Epoch  5 / 18
+Batch[0] - loss: 0.485324  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.474649  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.543992  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.511710  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.522584  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.492016  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.423553  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.403861  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.416473  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.410620  acc: 98.0000%(126/128)
+Batch[10] - loss: 0.442195  acc: 99.0000%(127/128)
+Batch[11] - loss: 0.385541  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.354390  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.346746  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.368524  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.306851  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.303652  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.367789  acc: 99.0000%(127/128)
+Batch[18] - loss: 0.286733  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.301195  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.341316  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.290028  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.273891  acc: 99.0000%(127/128)
+Batch[23] - loss: 0.275030  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.274529  acc: 100.0000%(75/75)
+Average loss:0.384128 average acc:99.000000%
+Val set acc: 0.9486081370449678
+Best val set acc: 0
+
+Epoch  6 / 18
+Batch[0] - loss: 0.221386  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.183826  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.197682  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.227428  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.194696  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.172395  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.205677  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.142660  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.181895  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.162265  acc: 99.0000%(127/128)
+Batch[10] - loss: 0.200311  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.138830  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.139849  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.166274  acc: 98.0000%(126/128)
+Batch[14] - loss: 0.120237  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.183560  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.128395  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.147332  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.153080  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.137411  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.117086  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.104808  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.146275  acc: 99.0000%(127/128)
+Batch[23] - loss: 0.107133  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.115378  acc: 100.0000%(75/75)
+Average loss:0.159835 average acc:99.000000%
+Val set acc: 0.9400428265524625
+Best val set acc: 0
+
+Epoch  7 / 18
+Batch[0] - loss: 0.101206  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.102541  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.072171  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.097299  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.118184  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.083426  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.072247  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.094232  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.109081  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.091279  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.077291  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.057027  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.060650  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.090233  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.072582  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.075117  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.072389  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.078828  acc: 99.0000%(127/128)
+Batch[18] - loss: 0.059178  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.070101  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.062051  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.057583  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.071451  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.056645  acc: 99.0000%(127/128)
+Batch[24] - loss: 0.049619  acc: 100.0000%(75/75)
+Average loss:0.078096 average acc:99.000000%
+Val set acc: 0.9486081370449678
+Best val set acc: 0
+
+Epoch  8 / 18
+Batch[0] - loss: 0.052795  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.052644  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.051658  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.058337  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.046575  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.044163  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.066798  acc: 99.0000%(127/128)
+Batch[7] - loss: 0.045568  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.048087  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.047570  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.033402  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.040422  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.048116  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.039138  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.038976  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.052293  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.036090  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.042334  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.045091  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.028477  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.040135  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.047810  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.029346  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.030902  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.033125  acc: 100.0000%(75/75)
+Average loss:0.043994 average acc:99.000000%
+Val set acc: 0.9528907922912205
+Best val set acc: 0
+
+Epoch  9 / 18
+Batch[0] - loss: 0.031753  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.049387  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.042443  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.044308  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.029967  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.021277  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.027817  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.032001  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.027866  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.031909  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.033642  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.028926  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.029804  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.025505  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.020232  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.020029  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.037665  acc: 99.0000%(127/128)
+Batch[17] - loss: 0.031608  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.029045  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.022145  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.028284  acc: 99.0000%(127/128)
+Batch[21] - loss: 0.023995  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.027977  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.021466  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.039631  acc: 98.0000%(74/75)
+Average loss:0.030347 average acc:99.000000%
+Val set acc: 0.9528907922912205
+Best val set acc: 0
+              precision    recall  f1-score   support
+
+          NR    0.96916   0.93617   0.95238       235
+          FR    0.93750   0.96983   0.95339       232
+
+    accuracy                        0.95289       467
+   macro avg    0.95333   0.95300   0.95289       467
+weighted avg    0.95343   0.95289   0.95288       467
+
+save model!!!
+
+Epoch  10 / 18
+Batch[0] - loss: 0.021038  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.017828  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.023727  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.018543  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.018911  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.021904  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.024246  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.015161  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.018163  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.020414  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.026983  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.028416  acc: 99.0000%(127/128)
+Batch[12] - loss: 0.024847  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.016361  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.015256  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.024001  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.017873  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.017135  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.015153  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.022236  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.016024  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.018015  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.011824  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.015251  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.016957  acc: 100.0000%(75/75)
+Average loss:0.019451 average acc:99.000000%
+Val set acc: 0.9379014989293362
+Best val set acc: 0.9528907922912205
+
+Epoch  11 / 18
+Batch[0] - loss: 0.032453  acc: 99.0000%(127/128)
+Batch[1] - loss: 0.025509  acc: 99.0000%(127/128)
+Batch[2] - loss: 0.018145  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.017908  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.014178  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.014211  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.012224  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.014620  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.021884  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.014817  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.019403  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.011984  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.020366  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.014318  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.013466  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.037294  acc: 99.0000%(127/128)
+Batch[16] - loss: 0.013790  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.024063  acc: 99.0000%(127/128)
+Batch[18] - loss: 0.015341  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.011818  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.009485  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.010835  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.013421  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.015998  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.008419  acc: 100.0000%(75/75)
+Average loss:0.017038 average acc:99.000000%
+Val set acc: 0.9357601713062098
+Best val set acc: 0.9528907922912205
+
+Epoch  12 / 18
+Batch[0] - loss: 0.012177  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.011571  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.010185  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.012409  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.016206  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.009170  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.010893  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.007005  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.009409  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.012580  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.013796  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.011482  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.010824  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.009625  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.014186  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.012412  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.010506  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.010398  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.013138  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.008812  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.011604  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.009384  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.011070  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.010921  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.008638  acc: 100.0000%(75/75)
+Average loss:0.011136 average acc:100.000000%
+Val set acc: 0.9528907922912205
+Best val set acc: 0.9528907922912205
+
+Epoch  13 / 18
+Batch[0] - loss: 0.014011  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.013353  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.011054  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.009989  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.009704  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.012778  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.010255  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.009101  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.006493  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.008767  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.012410  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.008906  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.008904  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.010253  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.008627  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.013507  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.009439  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.007494  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.008925  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.006949  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.009554  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.010352  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.010778  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.011258  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.032348  acc: 98.0000%(74/75)
+Average loss:0.011008 average acc:99.000000%
+Reload the best model...
+0.0005
+Val set acc: 0.9528907922912205
+Best val set acc: 0.9528907922912205
+
+Epoch  14 / 18
+Batch[0] - loss: 0.023975  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.029482  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.017711  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.023632  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.025306  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.017385  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.024266  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.017207  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.016637  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.021718  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.022915  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.033530  acc: 99.0000%(127/128)
+Batch[12] - loss: 0.030723  acc: 99.0000%(127/128)
+Batch[13] - loss: 0.016647  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.019894  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.024033  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.018164  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.015218  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.017704  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.018283  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.017866  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.034627  acc: 99.0000%(127/128)
+Batch[22] - loss: 0.027255  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.017774  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.024892  acc: 100.0000%(75/75)
+Average loss:0.022274 average acc:99.000000%
+Val set acc: 0.9400428265524625
+Best val set acc: 0.9528907922912205
+
+Epoch  15 / 18
+Batch[0] - loss: 0.021313  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.022131  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.029666  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.019156  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.017861  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.019642  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.019157  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.014921  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.017038  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.023566  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.022383  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.021584  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.013499  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.019544  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.021363  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.015046  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.015227  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.016151  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.015609  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.014131  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.018150  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.019615  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.018113  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.018619  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.019716  acc: 100.0000%(75/75)
+Average loss:0.018928 average acc:100.000000%
+Val set acc: 0.9464668094218416
+Best val set acc: 0.9528907922912205
+
+Epoch  16 / 18
+Batch[0] - loss: 0.018898  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.020122  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.014522  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.017028  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.015073  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.015108  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.017695  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.017323  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.019267  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.013555  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.012609  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.022807  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.015500  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.016459  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.012974  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.015126  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.015942  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.020150  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.021415  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.011249  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.014442  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.014639  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.014238  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.012779  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.015424  acc: 100.0000%(75/75)
+Average loss:0.016174 average acc:100.000000%
+Reload the best model...
+0.00025
+Val set acc: 0.9528907922912205
+Best val set acc: 0.9528907922912205
+
+Epoch  17 / 18
+Batch[0] - loss: 0.020249  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.020564  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.020588  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.024883  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.026420  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.025811  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.015193  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.017419  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.024094  acc: 100.0000%(128/128)
+Batch[9] - loss: 0.018627  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.022316  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.035141  acc: 99.0000%(127/128)
+Batch[12] - loss: 0.020779  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.020314  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.024667  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.022365  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.023707  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.022345  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.017433  acc: 100.0000%(128/128)
+Batch[19] - loss: 0.018686  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.032513  acc: 99.0000%(127/128)
+Batch[21] - loss: 0.016416  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.017192  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.022930  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.014428  acc: 100.0000%(75/75)
+Average loss:0.021803 average acc:99.000000%
+Val set acc: 0.9443254817987152
+Best val set acc: 0.9528907922912205
+
+Epoch  18 / 18
+Batch[0] - loss: 0.016642  acc: 100.0000%(128/128)
+Batch[1] - loss: 0.027324  acc: 100.0000%(128/128)
+Batch[2] - loss: 0.020388  acc: 100.0000%(128/128)
+Batch[3] - loss: 0.014613  acc: 100.0000%(128/128)
+Batch[4] - loss: 0.014116  acc: 100.0000%(128/128)
+Batch[5] - loss: 0.015066  acc: 100.0000%(128/128)
+Batch[6] - loss: 0.023289  acc: 100.0000%(128/128)
+Batch[7] - loss: 0.023429  acc: 100.0000%(128/128)
+Batch[8] - loss: 0.026448  acc: 99.0000%(127/128)
+Batch[9] - loss: 0.020724  acc: 100.0000%(128/128)
+Batch[10] - loss: 0.028448  acc: 100.0000%(128/128)
+Batch[11] - loss: 0.019394  acc: 100.0000%(128/128)
+Batch[12] - loss: 0.019822  acc: 100.0000%(128/128)
+Batch[13] - loss: 0.026597  acc: 100.0000%(128/128)
+Batch[14] - loss: 0.018732  acc: 100.0000%(128/128)
+Batch[15] - loss: 0.016995  acc: 100.0000%(128/128)
+Batch[16] - loss: 0.014267  acc: 100.0000%(128/128)
+Batch[17] - loss: 0.019652  acc: 100.0000%(128/128)
+Batch[18] - loss: 0.034453  acc: 99.0000%(127/128)
+Batch[19] - loss: 0.017067  acc: 100.0000%(128/128)
+Batch[20] - loss: 0.015418  acc: 100.0000%(128/128)
+Batch[21] - loss: 0.022143  acc: 100.0000%(128/128)
+Batch[22] - loss: 0.018809  acc: 100.0000%(128/128)
+Batch[23] - loss: 0.018282  acc: 100.0000%(128/128)
+Batch[24] - loss: 0.019588  acc: 100.0000%(75/75)
+Average loss:0.020468 average acc:99.000000%
+Val set acc: 0.9400428265524625
+Best val set acc: 0.9528907922912205
+================================
+              precision    recall  f1-score   support
+
+          NR      0.967     0.936     0.951       529
+          FR      0.937     0.967     0.952       521
+
+    accuracy                          0.951      1050
+   macro avg      0.952     0.952     0.951      1050
+weighted avg      0.952     0.951     0.951      1050
+
